@@ -1,19 +1,88 @@
 import mongoose from 'mongoose';
 
-const userSchema = new mongoose.Schema({
-    username:{
-        type: String,
-        required: true,
-        unique: true
-    },
-    password:{
-        type: String,
-        required: true,
-        minlength: 6
-    },
-},
-    {timestamp: true});
+/*
+Status: Under Development
+Access: Ansh, Abdul, DP, Sarthak
+Description: Schema for Student Profile
+Proposals:
+    - here (Status: here)
+    - here (Status: here)
+Remarks/message:
+    - here
+*/
 
-const User = mongoose.model('User',userSchema);
+
+
+//username, pass, last login, (password encrypted and salted)
+const studentCred = new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    lastLogin: {type: Date, required: true},
+});
+
+
+//address. Idk if needed
+const address = new mongoose.Schema({
+    street: { type: String, required: false },
+    city: { type: String, required: true },
+    state: { type: String, required: true },
+    district: { type: String, required: true },
+    pin_code: { type: String, required: true, minlength: 6, maxlength: 6 },
+});
+
+
+
+
+const academics = new mongoose.Schema({
+    cgpa: { type: Number, required: true, min: 0, max: 10 },
+    tenth_board_name: { type: String, required: true },
+    tenth_percentage: { type: Number, required: true, min: 0, max: 100 },
+    tenth_passing_year: { type: Number, required: true, minlength: 4, maxlength: 4 },
+    twelfth_board_name: { type: String, required: true },
+    twelfth_percentage: { type: Number, required: true, min: 0, max: 100 },
+    twelfth_passing_year: { type: Number, required: true, minlength: 4, maxlength: 4 },
+    graduation_degree: { type: String, required: true, default: 'B.Tech', enum: ['B.Tech'] },
+    // graduation_percentage: { type: Number, required: true, min: 0, max: 100 },
+    graduation_year: { type: Number, required: true, minlength: 4, maxlength: 4 },
+
+
+    //not sure if needed
+    // pg_subject: { type: String, required: false },
+    // pg_year: { type: Number, required: false, minlength: 4, maxlength: 4 },
+    
+    
+});
+
+//applied drives. Same data in another collection
+const appliedDrives = new mongoose.Schema({
+    drive_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Drive', required: true },
+    application_date: { type: Date, required: true, default: Date.now },
+    status: { type: String, required: true, enum: ['Applied', 'Shortlisted', 'Selected', 'Rejected'], default: 'Applied'},
+});
+
+
+
+//final schema
+const studentSchema = new mongoose.Schema({
+    creds: { type: studentCred, required: true },     // nested
+    roll_no: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
+    email_id: { type: String, required: true, unique: true, match: /\S+@\S+\.\S+/ },
+    stream: { type: String, required: true },
+    // batch_year: { type: Number, required: true, minlength: 4, maxlength: 4 },
+    phone_no: [{ type: String, required: true, minlength: 10, maxlength: 15 }],
+    gender: { type: String, required: true, enum: ['Male', 'Female', 'Other'] },
+    work_experience: [{ type: String, required: false }],
+    additional_skills: [{ type: String, required: false }],
+    digital_locker: { type: String, required: true },
+
+    address: { type: address, required: true },     // nested
+    personal_details: { type: personalDetails, required: false },   // nested
+    academics: { type: academics, required: true },    // nested
+    applied_drives: { type: [appliedDrives], required: false },   // nested
+});
+
+
+const User = mongoose.model('Student',userSchema);
 
 export default User;
