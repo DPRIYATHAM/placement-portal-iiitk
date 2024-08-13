@@ -1,8 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+require('./cooking.js');
 
-import connectToMongoDB from './src/db/connectToMongoDB.js';
+import connectToMongoDB from './src/db/db.js';
 
 import authRoutes from './src/routes/authRoutes.js';
 

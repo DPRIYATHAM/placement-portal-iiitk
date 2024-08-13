@@ -1,4 +1,4 @@
-import User from '../models/userModel.js';
+import User from '../models/studentModel.js';
 import generateTokenAndSetCookie from '../utils/generateToken.js';
 
 export const logout = async(req, res) => {
