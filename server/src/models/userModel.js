@@ -76,13 +76,12 @@ const studentSchema = new mongoose.Schema({
     additional_skills: [{ type: String, required: false }],
     digital_locker: { type: String, required: true },
 
-    address: { type: address, required: true },     // nested
-    personal_details: { type: personalDetails, required: false },   // nested
-    academics: { type: academics, required: true },    // nested
-    applied_drives: { type: [appliedDrives], required: false },   // nested
+    address: { type: address, required: true },                 // nested
+    academics: { type: academics, required: true },             // nested
+    applied_drives: { type: [appliedDrives], required: false }, // nested
 });
 
 
-const User = mongoose.model('Student',userSchema);
+const Student = mongoose.model('Student',studentSchema);
 
-export default User;
+export default Student;
