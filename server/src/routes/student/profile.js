@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const protectAuth = require('../../middleware/studentAuth');
-const { default: Student } = require('../../models/studentModel');
+const Student  = require('../../models/studentModel');
 
 // fetch userinfo
 router.get('/', protectAuth, async (req, res) => {
@@ -49,6 +49,11 @@ router.post('/', protectAuth, async (req, res) => {
             academics: req.body.academics,
             applied_drives: req.body.applied_drives
         };
+
+        // remove undefined or null fields
+        Object.keys(updateData).forEach(key => updateData[key] === undefined || updateData[key] === null && delete updateData[key]);
+
+        
 
         const student = await Student.findByIdAndUpdate(req.user.id, updateData, { new: true });
 

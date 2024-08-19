@@ -1,7 +1,7 @@
 const express = require('express');
 const Drive = require('../../models/driveModel');
-const { default: protectRoute } = require('../../middleware/studentAuth');
-const { default: Student } = require('../../models/studentModel');
+const protectRoute  = require('../../middleware/studentAuth');
+const Student = require('../../models/studentModel');
 const router = express.Router();
 
 

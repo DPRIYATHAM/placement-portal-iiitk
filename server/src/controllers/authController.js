@@ -1,7 +1,7 @@
-import User from '../models/studentModel.js';
-import generateTokenAndSetCookie from '../utils/generateToken.js';
+const User = require('../models/studentModel.js');
+const generateTokenAndSetCookie = require('../utils/generateToken.js');
 
-export const logout = async(req, res) => {
+const logout = async(req, res) => {
     try{
         res.cookie('jwt',"",{maxAge: 0});
         res.status(200).json({message: "User logged out successfully"});
@@ -14,7 +14,7 @@ export const logout = async(req, res) => {
 };
 
 
-export const login = async(req, res) => {
+const login = async(req, res) => {
     try{
         const {username, password} = req.body;
         const user = await User.findOne({username});
@@ -41,4 +41,11 @@ export const login = async(req, res) => {
 
     }
 
+};
+
+
+// export
+module.exports = {
+    login,
+    logout
 };

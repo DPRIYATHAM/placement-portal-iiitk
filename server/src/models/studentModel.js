@@ -14,11 +14,7 @@ Remarks/message:
 
 
 //username, pass, last login, (password encrypted and salted)
-const studentCred = new mongoose.Schema({
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    lastLogin: {type: Date, required: true},
-});
+
 
 
 //address. Idk if needed
@@ -64,7 +60,7 @@ const appliedDrives = new mongoose.Schema({
 
 //final schema
 const studentSchema = new mongoose.Schema({
-    creds: { type: studentCred, required: true },     // nested
+    creds: { type: mongoose.Schema.Types.ObjectId, ref: 'studentCred', required: true },     // nested
     roll_no: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     email_id: { type: String, required: true, unique: true, match: /\S+@\S+\.\S+/ },
@@ -84,4 +80,5 @@ const studentSchema = new mongoose.Schema({
 
 const Student = mongoose.model('Student',studentSchema);
 
-export default Student;
+
+module.exports = Student;
