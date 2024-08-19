@@ -1,35 +1,28 @@
 const express = require('express');
+const cors=require('cors');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 require('./cooking.js');
-
-const connectToMongoDB = require('./src/db/db.js');
-
-const authRoutes = require('./src/routes/authRoutes.js');
-const studentroute = require('./src/routes/student/studentroute.js');
 dotenv.config();
-
 const app = express();
-const PORT = process.env.PORT || 8000;
+const connectToMongoDB = require('./src/db/db.js');
 
 app.use(express.json());
 app.use(cookieParser());
-
-app.use("/api/auth",authRoutes);
-app.use("/api/student",studentroute);
+app.use(cors());
 
 
 
-
-// app.get('/', (req, res) => {
-//     res.send('Hello World!');
-//     }
-// );
+app.get('/', (req, res) => {
+    res.send('Hello World');
+});
 
 
 
-app.listen(PORT, () => {
+const IP = process.env.IP || 'localhost';
+const PORT = process.env.PORT || 8000;
+
+app.listen( PORT , IP , () => {
     connectToMongoDB();
-    console.log(`Server is running on http://localhost:${PORT}`);
-    }
-);
+    console.log(`Server is running on http://${IP}:${PORT}`);
+});

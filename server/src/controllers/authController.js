@@ -1,5 +1,12 @@
+// to add: add salt to password
+
+
+
+const bcrypt = require('bcrypt');
+
 const User = require('../models/studentModel.js');
-const generateTokenAndSetCookie = require('../utils/generateToken.js');
+
+const generateTokenAndSetCookie = require('../jwt/generate.js');
 
 const logout = async(req, res) => {
     try{
@@ -22,7 +29,7 @@ const login = async(req, res) => {
         if (!user){
             return res.status(400).json({error: "Invalid username"});
         }
-        if (user.password !== password){
+        if (bcrypt.compare(password, user.password)){
             return res.status(400).json({error: "Invalid password"});
         }
 
