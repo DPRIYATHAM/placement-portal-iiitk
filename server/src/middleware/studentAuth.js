@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/studentModel.js');
-
+const Creds = require('../models/studentCred');
+const Student = require('../models/studentModel');
 const protectRoute = async (req, res, next) => {
     try{
         let token = req.cookies.jwt;
@@ -12,12 +12,19 @@ const protectRoute = async (req, res, next) => {
         if (!decoded){
             return res.status(401).json({error:"Invalid token"});
         }
-        const user = await User.findById(decoded.userId).select('-password');
+        let user = await Student.findOne({ creds: decoded.userId })
+                                // .populate('creds', '-password'); maybe add the creds data if needed
 
-        if (!user){
-            return res.status(401).json({error: "User not found"});
+        if (!user) {
+            const creds = await Creds.findById(decoded.userId).select('-password');
+            if (!creds) {
+                return res.status(401).json({ error: "Not authorized, user not found" });
+            }
+
+            req.user = { creds, profileComplete: false };
+        } else {
+            req.user = { user, profileComplete: true };
         }
-        req.user = user;
         next();
     }
     catch(error)

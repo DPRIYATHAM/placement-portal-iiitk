@@ -4,7 +4,8 @@
 
 const bcrypt = require('bcrypt');
 
-const User = require('../models/studentModel.js');
+const StudentCred = require('../models/studentCred.js');
+
 
 const generateTokenAndSetCookie = require('../jwt/generate.js');
 
@@ -21,33 +22,34 @@ const logout = async(req, res) => {
 };
 
 
-const login = async(req, res) => {
-    try{
-        const {username, password} = req.body;
-        const user = await User.findOne({username});
-    
-        if (!user){
-            return res.status(400).json({error: "Invalid username"});
-        }
-        if (bcrypt.compare(password, user.password)){
-            return res.status(400).json({error: "Invalid password"});
-        }
+const login = async (req, res) => {
+    const { username, password, userType } = req.body;
 
-        generateTokenAndSetCookie(user._id, res);
-
-        res.status(200).json({
-            _id : user._id,
-            username : user.username,
-            message: "User logged in successfully"
-        });
-        
-
-    }catch(error){
-        console.error('Error in login controller:', error.message);
-        res.status(500).json({error: "Internal Server error "});        
-
+    if (!['student', 'coordinator'].includes(userType)) {
+        return res.status(400).json({ error: "Invalid user type" });
     }
 
+    try {
+        // TODO : Add CoordinatorCred model
+        const Model = userType === 'student' ? StudentCred : StudentCred;
+        const user = await Model.findOne({ username });
+
+        if (user && await bcrypt.compare(password, user.password)) {
+            generateTokenAndSetCookie(user._id, res);
+            return res.status(200).json({
+                _id: user._id,
+                username: user.username,
+                userType,
+                message: "User logged in successfully"
+            });
+        }
+
+        res.status(400).json({ error: "Invalid username or password" });
+
+    } catch (error) {
+        console.error('Error in login controller:', error.message);
+        res.status(500).json({ error: "Internal Server error" });
+    }
 };
 
 
