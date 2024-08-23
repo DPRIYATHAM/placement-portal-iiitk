@@ -5,9 +5,10 @@
 const bcrypt = require('bcrypt');
 
 const StudentCred = require('../models/studentCred.js');
-
+const CoordinatorCred = require('../models/coordinatorCred.js');
 
 const generateTokenAndSetCookie = require('../jwt/generate.js');
+const Coordinator = require('../models/coordinatorModel.js');
 
 const logout = async(req, res) => {
     try{
@@ -31,7 +32,7 @@ const login = async (req, res) => {
 
     try {
         // TODO : Add CoordinatorCred model
-        const Model = userType === 'student' ? StudentCred : StudentCred;
+        const Model = userType === 'student' ? StudentCred : CoordinatorCred;
         const user = await Model.findOne({ username });
 
         if (user && await bcrypt.compare(password, user.password)) {

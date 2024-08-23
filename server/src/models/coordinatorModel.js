@@ -9,7 +9,7 @@ const coordCreds = new mongoose.Schema({
 
 
 const coordinator = new mongoose.Schema({
-    creds: { type: coordCreds, required: true },
+    creds: { type: mongoose.Schema.Types.ObjectId, ref: 'CoordinatorCred', required: true }, 
     name: { type: String, required: true },
     email_id: { type: String, required: true, unique: true, match: /\S+@\S+\.\S+/ },
     phone_no: { type: String, required: false, minlength: 10, maxlength: 15 },
