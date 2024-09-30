@@ -89,6 +89,42 @@ const data = [
         location : "Banglore",
         duration : "6 Months",
         image : google
+    },
+    {
+        id : 11,
+        name : "Facebook",
+        role : "Software Engineer",
+        type : "Internship",
+        location : "Banglore",
+        duration : "6 Months",
+        image : google
+    },
+    {
+        id : 12,
+        name : "Facebook",
+        role : "Software Engineer",
+        type : "Internship",
+        location : "Banglore",
+        duration : "6 Months",
+        image : google
+    },
+    {
+        id : 13,
+        name : "Facebook",
+        role : "Software Engineer",
+        type : "Internship",
+        location : "Banglore",
+        duration : "6 Months",
+        image : google
+    },
+    {
+        id : 14,
+        name : "Facebook",
+        role : "Software Engineer",
+        type : "Internship",
+        location : "Banglore",
+        duration : "6 Months",
+        image : google
     }
 ]
 
