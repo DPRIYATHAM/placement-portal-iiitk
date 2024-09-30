@@ -5,6 +5,7 @@ import Dashboard from "../src/Pages/Dashboard";
 import Profile from "../src/Pages/Profile";
 import StudentDrive from "./Pages/StudentDrive";
 import AddDrive from "./Pages/AddDrive";
+import CoordinatorDrive from "./Pages/CoordinatorDrive";
 import DriveStudent from "../src/Pages/DriveStudent";
 import DriveCoordinator from "../src/Pages/DriveCoordinator";
 import CoordinatorDrive from "../src/Pages/CoordinatorDrive";
