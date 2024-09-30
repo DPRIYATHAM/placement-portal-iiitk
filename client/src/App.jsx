@@ -5,7 +5,9 @@ import Dashboard from "../src/Pages/Dashboard";
 import Profile from "../src/Pages/Profile";
 import StudentDrive from "./Pages/StudentDrive";
 import AddDrive from "./Pages/AddDrive";
-import CoordinatorDrive from "./Pages/CoordinatorDrive";
+import DriveStudent from "../src/Pages/DriveStudent";
+import DriveCoordinator from "../src/Pages/DriveCoordinator";
+import CoordinatorDrive from "../src/Pages/CoordinatorDrive";
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/studentDrive" element={<DriveStudent />} />
+      <Route path="/coordinatorDrive" element={<CoordinatorDrive />} />
       <Route path="/drive/:id" element={<StudentDrive />} />
       <Route path="/add-drive" element={<AddDrive />} />
       <Route path="/coordinator-drive" element={<CoordinatorDrive />} />

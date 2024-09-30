@@ -1,76 +1,61 @@
-import { AgGridReact } from "ag-grid-react";
-import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-quartz.css";
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import JobListCard from "../components/JobListCard/JobListCard.jsx";
+import RightPanel from "../components/RightPanel.jsx";
+import data from "../../data.js";
+import styles from "./StudentDrive.module.css";
 
-const CoordinatorDrive = () => {
-  const [rowData, setRowData] = useState([
-    { name: "Toyota", model: "Celica", price: 35000, electric: true },
-    { name: "Ford", model: "Mondeo", price: 32000, electric: true },
-    { name: "Porsche", model: "Boxster", price: 72000, electric: false }
-  ]);
+const StudentDrive = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [selectedCard, setSelectedCard] = useState(id ? parseInt(id) : 1);
 
-  const [searchText, setSearchText] = useState("");
-  const gridRef = useRef();
-
-  const pagination = true;
-  const paginationPageSize = 10;
-  const paginationPageSizeSelector = [5, 10, 15];
-
-  const [columnDefs] = useState([
-    { headerName: "Name", field: "name", checkboxSelection: true },
-    { headerName: "Model", field: "model" },
-    { headerName: "Price", field: "price" },
-    { headerName: "Electric", field: "electric", editable: true }
-  ]);
-
-  const selectAllRows = () => {
-    gridRef.current.api.selectAll(); // Select all rows
-  };
-
-  const deselectAllRows = () => {
-    gridRef.current.api.deselectAll(); // Deselect all rows
+  const handleCardClick = (id) => {
+    setSelectedCard(id);
+    navigate(`/drive/${id}`); // Corrected this line
   };
 
   return (
-    <div>
-      <h1>Coordinator Drive</h1>
-
-      {/* Search Input */}
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        style={{
-          marginBottom: "10px",
-          padding: "5px",
-          width: "200px"
-        }}
-      />
-
-      {/* Select All / Deselect All Buttons */}
-      <div>
-        <button onClick={selectAllRows} style={{ marginRight: "10px" }}>
-          Select All
-        </button>
-        <button onClick={deselectAllRows}>Deselect All</button>
+    <div className="relative h-screen overflow-hidden">
+      <div className="sticky top-0 z-10 bg-white">
+        <Navbar />
+        {/* <Filter /> */}
+      </div>
+      <div className="flex h-[calc(100vh-64px)]">
+        {" "}
+        {/* Adjust 64px to match your Navbar height */}
+        <section
+          className={`h-[90%] w-[35vw] overflow-y-auto ${styles.scrollbarHide}`}
+        >
+          {data.map((job, index) => (
+            <div
+              key={index}
+              className={`cursor-pointer ${
+                selectedCard === job.id ? "bg-coral-red/20" : "bg-white"
+              }`}
+              onClick={() => handleCardClick(job.id)}
+            >
+              <JobListCard job={job} id={selectedCard} />
+            </div>
+          ))}
+        </section>
+        <section className="h-[90%] flex-1 overflow-y-auto overflow-x-hidden">
+          <RightPanel user="coordinator" />
+        </section>
       </div>
 
-      <div className="ag-theme-quartz h-[20rem] w-[50rem] mt-4">
-        <AgGridReact
-          ref={gridRef}
-          rowData={rowData}
-          columnDefs={columnDefs}
-          pagination={pagination}
-          paginationPageSize={paginationPageSize}
-          paginationPageSizeSelector={paginationPageSizeSelector}
-          rowSelection="multiple"
-          quickFilterText={searchText}
-        />
-      </div>
+      <style jsx>{`
+        .${styles.scrollbarHide}::-webkit-scrollbar {
+          display: none;
+        }
+        .${styles.scrollbarHide} {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 };
 
-export default CoordinatorDrive;
+export default StudentDrive;
