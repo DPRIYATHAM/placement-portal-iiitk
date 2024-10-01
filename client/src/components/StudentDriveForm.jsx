@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function StudentDriveForm({ details }) {
+export default function StudentDriveForm({ details, handleFormClick }) {
   const [formData, setFormData] = useState({
     fullName: "john Doe",
     email: "details.email",
@@ -22,8 +22,8 @@ export default function StudentDriveForm({ details }) {
   };
 
   return (
-    <div className="w-full  font-ubuntu">
-      <div className="ml-auto flex gap-3  w-full  rounded-xl mt-2 mb-2">
+    <div className="mx-12 right-0 border-gray-100 border-2 border-solid p-4 rounded-xl mt-2 mb-2">
+      <div className=" flex gap-3  w-full  rounded-xl mt-2 mb-2">
         <form
           onSubmit={handleSubmit}
           className="bg-white p-10 rounded-xl shadow-sm w-full border border-gray-200"
@@ -148,10 +148,16 @@ export default function StudentDriveForm({ details }) {
             </div>
 
             {/* Submit Button */}
-            <div className="text-center mt-6">
+            <div className="text-center mt-6 ">
+              <button
+                onClick={handleFormClick}
+                className=" bg-custom-red hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg mr-4 "
+              >
+                Back
+              </button>
               <button
                 type="submit"
-                className="bg-custom-red hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg"
+                className="bg-black hover:bg-gray-700 text-white font-semibold px-6 py-2 rounded-lg "
               >
                 Submit
               </button>

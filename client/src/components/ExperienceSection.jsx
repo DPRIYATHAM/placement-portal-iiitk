@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ExperienceCard from "./ExperienceCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const defaultExperience = {
   id: 1,
@@ -8,7 +10,7 @@ const defaultExperience = {
   content: "New Experience Content"
 };
 
-export default function ExperienceSection({ user, array_exp }) {
+export default function ExperienceSection({ user, arrayExp }) {
   const [experiences, setExperiences] = useState([
     {
       id: 0,
@@ -17,7 +19,7 @@ export default function ExperienceSection({ user, array_exp }) {
       content: `Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
     }
   ]);
-  const [array, setArray] = useState(array_exp);
+  const [expArray, setExpArray] = useState(arrayExp);
 
   const handleAddExperience = (newExperience = defaultExperience) => {
     setExperiences((prevExperiences) => [
@@ -28,18 +30,25 @@ export default function ExperienceSection({ user, array_exp }) {
       }
     ]);
   };
+
   const handleDeleteExperience = (id) => {
-    setArray((prevExperiences) =>
-      prevExperiences.filter((exp) => exp.id != id)
+    toast.success("Deleted experience");
+
+    setExpArray((prevExperiences) =>
+      prevExperiences.filter((exp) => exp.id !== id)
     );
   };
 
+  console.log(expArray);
+
   return (
     <div className="w-full font-ubuntu mt-18">
+      <ToastContainer position="top-center" autoClose={1000} hideProgressBar />
+
       <div className=" mx-12 right-0 rounded-xl mt-8 mb-2">
         {user === "coordinator" ? (
-          array_exp && array_exp.length > 0 ? (
-            array.map((exp) => (
+          arrayExp && arrayExp.length > 0 ? (
+            expArray.map((exp) => (
               <ExperienceCard
                 key={exp.id}
                 details={exp}

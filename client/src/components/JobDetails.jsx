@@ -15,7 +15,7 @@ export default function AboutWork({ details, stud_info }) {
   }
 
   return (
-    <div className="w-full font-ubuntu">
+    <div className="mx-12 right-0 border-gray-100 border-2 border-solid p-4 rounded-xl mt-2 mb-2">
       <div className={`mx-12 right-0   rounded-xl mt-2 mb-2 relative`}>
         {formDisplay ? (
           <StudentDriveForm details={stud_info} />
@@ -64,7 +64,7 @@ export default function AboutWork({ details, stud_info }) {
                 <p>End Date:&emsp;{details.end}</p>
               </div>
             </div>
-            <div className="flex w-full justify-center mt-4">
+            {/* <div className="flex w-full justify-center mt-4">
               {details.type === "coordinator" ? (
                 <div className="flex flex-col gap-5 w-full">
                   <div className="flex justify-end">
@@ -92,7 +92,7 @@ export default function AboutWork({ details, stud_info }) {
                   View application
                 </button>
               )}
-            </div>
+            </div> */}
           </div>
         )}
       </div>
