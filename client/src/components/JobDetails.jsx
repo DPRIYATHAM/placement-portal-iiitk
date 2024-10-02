@@ -3,22 +3,21 @@ import { BsDownload } from "react-icons/bs";
 import StudentDriveForm from "./StudentDriveForm";
 import { useState } from "react";
 
-export default function AboutWork({ details, stud_info }) {
+export default function AboutWork({ details, studentInfo }) {
   const experience = {
     name: "Name",
     date: "date",
     content: `Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
   };
   const [formDisplay, handleDisplayForm] = useState(false);
-  function handleClick() {
-    handleDisplayForm(true);
-  }
 
   return (
     <div className=" right-0 border-gray-100 border-2 border-solid p-4 sm:rounded-xl mt-2 mb-2 sm:mx-12">
-      <div className={` right-0 mx-2    mt-2 mb-2 relative sm:mx-12 sm:rounded-xl`}>
+      <div
+        className={` right-0 mx-2    mt-2 mb-2 relative sm:mx-12 sm:rounded-xl`}
+      >
         {formDisplay ? (
-          <StudentDriveForm details={stud_info} />
+          <StudentDriveForm details={studentInfo} />
         ) : (
           <div className=" sm:ml-7">
             <h1 className="font-medium text-xl text-custom-red">
@@ -96,7 +95,6 @@ export default function AboutWork({ details, stud_info }) {
           </div>
         )}
       </div>
-      
     </div>
   );
 }
