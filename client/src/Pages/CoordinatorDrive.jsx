@@ -123,7 +123,7 @@ const StudentDrive = () => {
         {" "}
         {/* Adjust 64px to match your Navbar height */}
         <section
-          className={`h-[90%] w-[35vw] overflow-y-auto ${styles.scrollbarHide}`}
+          className={` hidden h-[90%] w-[35vw] overflow-y-auto ${styles.scrollbarHide} sm:block`}
         >
           {data.map((job, index) => (
             <div
@@ -151,9 +151,9 @@ const StudentDrive = () => {
           <div className="flex w-full justify-center mt-4">
             <div className="flex flex-col gap-5 w-full">
               <div className="flex justify-end">
-                <div className=" flex mr-[3rem]  rounded-md px-3 py-1 items-center">
+                <div className=" flex mr-[3rem]  rounded-md sm:px-3 py-1 items-center">
                   <BsDownload className="text-custom-red" />
-                  &ensp; <h3 className="text-custom-red"> Download results</h3>
+                  &ensp; <h3 className="text-custom-red "> Download results</h3>
                 </div>
               </div>
               <div className="flex gap-20 justify-center">

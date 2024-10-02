@@ -15,12 +15,12 @@ export default function AboutWork({ details, stud_info }) {
   }
 
   return (
-    <div className="mx-12 right-0 border-gray-100 border-2 border-solid p-4 rounded-xl mt-2 mb-2">
-      <div className={`mx-12 right-0   rounded-xl mt-2 mb-2 relative`}>
+    <div className=" right-0 border-gray-100 border-2 border-solid p-4 sm:rounded-xl mt-2 mb-2 sm:mx-12">
+      <div className={` right-0 mx-2    mt-2 mb-2 relative sm:mx-12 sm:rounded-xl`}>
         {formDisplay ? (
           <StudentDriveForm details={stud_info} />
         ) : (
-          <div className="ml-7">
+          <div className=" sm:ml-7">
             <h1 className="font-medium text-xl text-custom-red">
               About the work
             </h1>
@@ -96,6 +96,7 @@ export default function AboutWork({ details, stud_info }) {
           </div>
         )}
       </div>
+      
     </div>
   );
 }

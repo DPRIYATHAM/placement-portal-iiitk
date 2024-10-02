@@ -56,16 +56,18 @@ function CompanyBanner({ job }) {
     });
   }
   return (
-    <div className=" w-full font-ubuntu">
+    <div className=" w-full font-ubuntu ">
       <Toast />
 
       {/* Handling LOGO,NAME,POSITION,OFFER TYPE */}
-      <div className="mx-12 right-0 border-gray-100 border-2 border-solid p-4 rounded-xl mt-2 mb-2">
-        <div className="w-12 float-left mr-4 mb-2 py-4 mx-6 sm:w-16">
+      <div className=" right-0 pl-[1.2rem]  border-gray-100 border-2 border-solid p-4   mb-2 sm:rounded-xl sm:mx-12">
+        <div className="flex  justify-center h-full float-right top-[10rem] ml-[-4rem]   sm:float-left sm:ml-0">
+        <div className="w-12 h-full flex items-center    mb-2 py-4 mx-6 mr-[1.5rem] sm:w-16  ">
           <img src={job.logo} alt={job.company} className="w-full h-auto " />
         </div>
-        <div className="flex flex-col gap-5 sm:gap-5">
-          <div className="flex flex-row sm:flex-row justify-between sm:items-center gap-2 sm:gap-4">
+        </div>
+        <div className="flex flex-col gap-3 sm:gap-5">
+          <div className="flex flex-row sm:flex-row justify-between gap-2 sm:items-center  sm:gap-4">
             <div className="flex flex-col">
               <div className="flex flex-row sm:flex-row sm:items-center gap-4">
                 <div className="  sm:2xl  text-3xl font-bold ">
@@ -82,16 +84,16 @@ function CompanyBanner({ job }) {
           </div>
 
           {/* Handling LOCATION,DURATION,SALARY/STIPEND */}
-          <div className="font-semibold flex flex-wrap gap-2 sm:gap-4">
-            <div className="flex items-center text-gray-500 text-base font-normal gap-1 ">
+          <div className="font-semibold flex flex-wrap gap-1.5 sm:gap-4">
+            <div className="flex items-center text-gray-500 text-base font-normal gap-0.2 sm:gap-1 ">
               <CiLocationOn size={23} />
               {job.location}
             </div>
-            <div className="flex items-center font-normal text-gray-500 gap-2 text-base">
+            <div className="flex items-center font-normal text-gray-500 gap-1 sm:gap-2 text-base">
               <SlCalender size={23} />
               {job.duration}
             </div>
-            <div className="flex items-center font-normal text-gray-500 gap-1 text-base">
+            <div className="flex items-center font-normal text-gray-500 gap-[0.5px] sm:gap-1 text-base">
               <BsCurrencyRupee size={23} />
               {job.salary}
             </div>

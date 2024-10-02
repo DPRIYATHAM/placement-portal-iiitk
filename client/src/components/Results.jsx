@@ -33,8 +33,8 @@ const Results = () => {
   };
 
   return (
-    <div className="w-full font-ubuntu mt-18">
-      <div className="mx-12 right-0  rounded-xl mt-8 mb-2">
+    <div className="sm:w-full font-ubuntu mt-18">
+      <div className="sm:mx-12 right-0  sm:rounded-xl mt-8 mb-2">
         <div>
           <h1>Coordinator Drive</h1>
 

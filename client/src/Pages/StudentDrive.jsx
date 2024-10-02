@@ -93,7 +93,7 @@ const StudentDrive = () => {
         {" "}
         {/* Adjust 64px to match your Navbar height */}
         <section
-          className={`h-[90%] w-[35vw] overflow-y-auto ${styles.scrollbarHide}`}
+          className={` h-[90%] w-[35vw] overflow-y-auto ${styles.scrollbarHide} hidden sm:block`}
         >
           {data.map((job, index) => (
             <div
