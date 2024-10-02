@@ -42,10 +42,10 @@ export default function ExperienceSection({ user, arrayExp }) {
   console.log(expArray);
 
   return (
-    <div className="w-full font-ubuntu mt-18">
+    <div className="w-full ml-[-1.2rem]  flex items-center font-ubuntu mt-18 sm:ml-0">
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar />
 
-      <div className=" mx-12 right-0 rounded-xl mt-8 mb-2">
+      <div className="   rounded-xl mt-8 mb-2 sm:mx-12">
         {user === "coordinator" ? (
           arrayExp && arrayExp.length > 0 ? (
             expArray.map((exp) => (
