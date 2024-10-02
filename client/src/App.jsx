@@ -15,7 +15,7 @@ const App = () => {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/drive/:id" element={<StudentDrive />} />
-      <Route path="/add-drive" element={<AddDrive />} />
+      <Route path="coordinator/add-drive" element={<AddDrive />} />
       <Route path="/coordinator/drive/:id" element={<CoordinatorDrive />} />
     </Routes>
   );

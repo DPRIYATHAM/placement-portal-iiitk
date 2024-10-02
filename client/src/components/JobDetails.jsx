@@ -1,5 +1,4 @@
 import React from "react";
-import { BsDownload } from "react-icons/bs";
 import StudentDriveForm from "./StudentDriveForm";
 import { useState } from "react";
 
@@ -63,35 +62,6 @@ export default function AboutWork({ details, studentInfo }) {
                 <p>End Date:&emsp;{details.end}</p>
               </div>
             </div>
-            {/* <div className="flex w-full justify-center mt-4">
-              {details.type === "coordinator" ? (
-                <div className="flex flex-col gap-5 w-full">
-                  <div className="flex justify-end">
-                    <div className=" flex   rounded-md px-3 py-1 items-center">
-                      <BsDownload className="text-custom-red" />
-                      &ensp;{" "}
-                      <h3 className="text-custom-red"> Download results</h3>
-                    </div>
-                  </div>
-                  <div className="flex gap-20 justify-center">
-                    <button className="button-31 pt-4" role="button">
-                      Edit Drive
-                    </button>
-                    <button className="button-31 pt-4" role="button">
-                      End Drive
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <button
-                  className="button-31 pt-4"
-                  role="button"
-                  onClick={handleClick}
-                >
-                  View application
-                </button>
-              )}
-            </div> */}
           </div>
         )}
       </div>

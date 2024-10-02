@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { toast } from "react-toastify";
 import Toast from "./Toast";
 
-export default function ExperienceCard({ details, user, onDelete }) {
-  const [like, setlike] = useState(false);
+const ExperienceCard = ({ details, user, onDelete }) => {
+  const [isLiked, setIsLiked] = useState(false);
 
-  function handleLikeClick() {
-    setlike((prev) => !prev);
-  }
+  const handleLikeClick = () => {
+    setIsLiked((prev) => !prev);
+  };
 
-  function handleDelete() {
+  const handleDelete = () => {
     if (typeof onDelete === "function") {
-      toast.error("Deleted experience.");
       onDelete(details.id);
+      toast.error("Experience deleted.");
     } else {
       console.error("onDelete is not a function");
     }
-  }
+  };
 
   return (
     <div id={details.id} className="w-full pr-16 font-ubuntu">
@@ -45,17 +45,19 @@ export default function ExperienceCard({ details, user, onDelete }) {
             <button className="self-start" onClick={handleDelete}>
               <h3 className="text-custom-red text-sm">Delete Experience</h3>
             </button>
-          ) : like ? (
-            <AiFillHeart
-              size={25}
-              onClick={handleLikeClick}
-              className="text-coral-red"
-            />
           ) : (
-            <AiOutlineHeart size={25} onClick={handleLikeClick} />
+            <button onClick={handleLikeClick}>
+              {isLiked ? (
+                <AiFillHeart size={25} className="text-coral-red" />
+              ) : (
+                <AiOutlineHeart size={25} />
+              )}
+            </button>
           )}
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default ExperienceCard;
