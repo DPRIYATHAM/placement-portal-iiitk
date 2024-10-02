@@ -93,7 +93,7 @@ const StudentDrive = () => {
         {" "}
         {/* Adjust 64px to match your Navbar height */}
         <section
-          className={`h-[90%] w-[35vw] overflow-y-auto ${styles.scrollbarHide}`}
+          className={`h-[90%] w-full overflow-y-auto ${styles.scrollbarHide} sm:w-[35vw]`}
         >
           {data.map((job, index) => (
             <div
@@ -107,7 +107,7 @@ const StudentDrive = () => {
             </div>
           ))}
         </section>
-        <section className="h-[90%] flex-1 overflow-y-auto overflow-x-hidden">
+        <section className="h-[90%] flex-1 overflow-y-auto overflow-x-hidden hidden sm:block">
           {/* <RightPanel /> */}
           <JobSummaryCard job={job} />
           {!formDisplay ? (
