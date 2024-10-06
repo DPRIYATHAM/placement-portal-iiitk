@@ -75,16 +75,15 @@ const DriveDetails = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted with data: ", formData);
-    // Here you can perform your submit logic (e.g., send data to an API)
   };
 
   const SectionOne = () => {
     return (
-      <section className="mt-[2rem] p-8">
+      <section className="mt-[2rem] p-2 sm:p-8">
         <p className="text-xl font-semibold">Drive Details:</p>
-        <div className="flex items-start justify-between mt-[1rem]">
+        <div className="flex flex-col order-2 justify-between  sm:flex-row mt-[1rem]">
           {/* Left form section */}
-          <div className="w-3/4">
+          <div className="w-full sm:w-3/4 mb-4 sm:mb-0">
             <InputField
               label="Company Name:"
               type="text"
@@ -92,17 +91,16 @@ const DriveDetails = () => {
               id="companyName"
             />
             <InputField label="Roles:" type="text" name="role" id="role" />
-            <div className="flex items-center mb-4 gap-8">
-              <div className="flex-1">
+            <div className="flex flex-col flex-wrap items-center gap-8 sm:flex-row sm:gap-4 mb-4">
+              <div className="flex-1 w-3/8">
                 <InputField
                   label="Start Date:"
                   type="date"
                   name="startDate"
                   id="startDate"
-                  className={"ml-6"}
                 />
               </div>
-              <div className="flex-1">
+              <div className="flex-1 w-3/8">
                 <InputField
                   label="End Date:"
                   type="date"
@@ -114,7 +112,7 @@ const DriveDetails = () => {
           </div>
 
           {/* Right section with circular file input */}
-          <div className="relative flex items-center justify-center mr-[5rem]">
+          <div className="relative order-1 flex items-center justify-center sm:order-2">
             <div className="relative rounded-full w-32 h-32 bg-red-100 flex items-center justify-center">
               <input
                 type="file"
@@ -377,19 +375,18 @@ const DriveDetails = () => {
           <CheckBox label="" name="requiredData" options={requiredData} />
         </div>
 
+        {/* Container for displaying selected data */}
         <div
-          className={`mx-8 bg-coral-red/20 rounded-lg p-2 h-[5rem] ${
+          className={`mx-8 bg-coral-red/20 rounded-lg p-2 min-h-[5rem] flex flex-wrap gap-2 ${
             formData.requiredData.length > 0 ? "block" : "hidden"
           }`}
         >
-          {
-            /* Display selected data */
-            formData.requiredData.map((data, index) => (
-              <span key={index} className="bg-coral-red/50 p-1 rounded-md mx-1">
-                {data}
-              </span>
-            ))
-          }
+          {/* Display selected data with wrapping */}
+          {formData.requiredData.map((data, index) => (
+            <span key={index} className="bg-coral-red/50 p-1 rounded-md">
+              {data}
+            </span>
+          ))}
         </div>
       </section>
     );
