@@ -44,3 +44,36 @@
 .button-31:focus {
   opacity: .75;
 }
+
+.button-post {
+  background-color: #222;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.0;
+
+  max-width: none;
+  min-height: 5px;
+  min-width: 10px;
+  outline: none;
+  overflow: hidden;
+  padding:6px 10px 6px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+ 
+}
+
+.button-post:hover,
+.button-post:focus {
+  opacity: .75;
+}
