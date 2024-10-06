@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { FaSearch, FaBars } from 'react-icons/fa';
-import logo from '../assets/Placement Portal/IIITK-Logo.png';
+import React, { useState } from "react";
+import { FaSearch, FaBars } from "react-icons/fa";
+import logo from "../assets/Placement Portal/IIITK-Logo.png";
 import { FaAngleDown } from "react-icons/fa";
 
 const NavbarCal = ({ toggleSidebar, onSearch }) => {
   const [showSearch, setShowSearch] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
@@ -16,8 +16,10 @@ const NavbarCal = ({ toggleSidebar, onSearch }) => {
   return (
     <nav className="flex items-center justify-between p-4 bg-white shadow-md relative w-full">
       <div className="flex items-center">
-        <div><img src={logo} alt="logo" className="w-10 h-10" /></div>
-        <div className='font-bold text-2xl ml-2'>Placement Portal</div>
+        <div>
+          <img src={logo} alt="logo" className="w-10 h-10" />
+        </div>
+        <div className="font-bold text-2xl ml-2">Placement Portal</div>
       </div>
 
       <div className="relative flex items-center w-full max-w-md mx-auto hidden custom:flex">
@@ -42,7 +44,7 @@ const NavbarCal = ({ toggleSidebar, onSearch }) => {
               alt="avatar"
               className="w-10 h-10 rounded-full border-2 border-gray-200"
             />
-            <FaAngleDown/>
+            <FaAngleDown />
           </div>
         </div>
       </div>
@@ -52,10 +54,7 @@ const NavbarCal = ({ toggleSidebar, onSearch }) => {
           className="text-xl mr-4 cursor-pointer"
           onClick={() => setShowSearch(!showSearch)}
         />
-        <FaBars
-          className="text-xl cursor-pointer"
-          onClick={toggleSidebar}
-        />
+        <FaBars className="text-xl cursor-pointer" onClick={toggleSidebar} />
       </div>
 
       {showSearch && (

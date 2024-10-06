@@ -1,0 +1,20 @@
+.fade-enter, .fade-exit {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-enter-active, .fade-exit-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 400ms, transform 400ms;
+}
+
+.fade-exit-active {
+  position: absolute;
+}
+
+.content-container {
+  min-height: 500px; /* Adjust based on the content size */
+  overflow: hidden;
+  position: relative;
+}
