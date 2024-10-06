@@ -81,9 +81,9 @@ const DriveDetails = () => {
     return (
       <section className="mt-[2rem] p-2 sm:p-8">
         <p className="text-xl font-semibold">Drive Details:</p>
-        <div className="flex flex-col order-2 justify-between  sm:flex-row mt-[1rem]">
+        <div className="flex flex-col  justify-between  sm:flex-row mt-[1rem]">
           {/* Left form section */}
-          <div className="w-full sm:w-3/4 mb-4 sm:mb-0">
+          <div className="w-full order-2 sm:w-3/4 mb-4 sm:mb-0">
             <InputField
               label="Company Name:"
               type="text"
@@ -112,7 +112,7 @@ const DriveDetails = () => {
           </div>
 
           {/* Right section with circular file input */}
-          <div className="relative order-1 flex items-center justify-center sm:order-2">
+          <div className="relative order-1 mb-4 flex items-center justify-center sm:order-2">
             <div className="relative rounded-full w-32 h-32 bg-red-100 flex items-center justify-center">
               <input
                 type="file"
@@ -130,7 +130,7 @@ const DriveDetails = () => {
     return (
       <section className="p-8">
         <p className="mt-[2rem] text-xl font-semibold">Employment Type:</p>
-        <div className="mt-[1rem] flex items-center gap-4 justify-between">
+        <div className="mt-[1rem] flex flex-col items-center gap-4 justify-between sm:flex-row">
           <div>
             <div className="flex gap-2 items-center mb-4">
               <p className="text-xl">Internship</p>
@@ -197,7 +197,7 @@ const DriveDetails = () => {
             </div>
           </div>
 
-          <hr className="w-[1px] h-[18rem] bg-black/20" />
+          <hr className="sm:w-[1px] sm:h-[18rem] bg-black/20 w-full h-[1px]" />
 
           <div>
             <div className="flex gap-2 items-center">
@@ -383,7 +383,10 @@ const DriveDetails = () => {
         >
           {/* Display selected data with wrapping */}
           {formData.requiredData.map((data, index) => (
-            <span key={index} className="bg-coral-red/50 p-1 rounded-md">
+            <span
+              key={index}
+              className="bg-coral-red/50 p-1 h-[2rem]  rounded-md"
+            >
               {data}
             </span>
           ))}

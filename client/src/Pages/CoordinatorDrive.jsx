@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import JobListCard from "../components/JobListCard/JobListCard";
 import JobSummaryCard from "../components/JobSummaryCard";
@@ -110,9 +110,11 @@ const StudentDrive = () => {
             </div>
           </div>
           <div className="flex gap-20 justify-center">
-            <button className="button-31 pt-4" role="button">
-              Edit Drive
-            </button>
+            <Link to={"/coordinator/add-drive"}>
+              <button className="button-31 pt-4" role="button">
+                Edit Drive
+              </button>
+            </Link>
             <button className="button-31 pt-4" role="button">
               End Drive
             </button>
