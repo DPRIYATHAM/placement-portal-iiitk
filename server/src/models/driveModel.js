@@ -4,7 +4,9 @@ const round = new mongoose.Schema({
 	round_number: { type: Number, required: true, min: 1 },
 	round_name: { type: String, required: true },
 	description: { type: String, required: true },
+	selected_students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }]
 });
+
 
 const criteria = new mongoose.Schema({
 	tenth_percentage: { type: Number, required: false, min: 0, max: 100 },
@@ -44,7 +46,27 @@ const drive = new mongoose.Schema({
 	drive_date: { type: Date, required: true },
 	rounds: { type: [round], required: true },
 	criteria: { type: criteria, required: true },
+	coordinator: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Coordinator', // Reference to the Coordinator model
+		required: true
+	}
+
 });
+
+// On Delete Cascade when a drive is deleted remove the drive reference from all students' applied_drives
+drive.pre('remove', async function (next) {
+    try {
+        await mongoose.model('Student').updateMany(
+            { 'applied_drives.drive_id': this._id },
+            { $pull: { applied_drives: { drive_id: this._id } } }
+        );
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
+
 
 const Drive = mongoose.model("Drive", drive);
 

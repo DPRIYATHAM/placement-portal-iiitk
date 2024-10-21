@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
-const Coord = require('../models/coordinatormodel.js');
+const Coord = require('../models/coordinatorCred');
 
-const protectRoute = async (req, res, next) => {
+const protectRouteCord = async (req, res, next) => {
     try{
         let token = req.cookies.jwt;
         if(!token){
@@ -26,3 +26,5 @@ const protectRoute = async (req, res, next) => {
         res.status(401).json({error: "Internal Server Error"});      
     }
 }
+
+module.exports = protectRouteCord;

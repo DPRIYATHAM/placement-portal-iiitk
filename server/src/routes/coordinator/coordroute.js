@@ -8,4 +8,3 @@ router.use("/profile",profilerooute)
 router.use("/register",register)
 
 module.exports = router;
-

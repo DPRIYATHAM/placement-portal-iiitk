@@ -31,6 +31,7 @@ router.get('/:driveId', protectRoute, async (req, res) => {
 });
 
 
+
 // apply for a drive only if student meets the criteria
 router.post('/apply/:driveId', protectRoute, async (req, res) => {
     try {

@@ -5,8 +5,13 @@ const Student = require('../../models/studentModel');
 const protectRoute = require('../../middleware/studentAuth');
 const router = express.Router();
 
-router.post('/register', async (req, res) => {
+router.post('', async (req, res) => {
     const { username, password } = req.body;
+
+    const user = await StudentCred.findOne({ username });
+    if (user) {
+        return res.status(400).json({ error: 'Username already exists' });
+    }
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -25,7 +30,7 @@ router.post('/register', async (req, res) => {
 });
 
 
-router.post('/compProfile', protectRoute,async (req, res) => {
+router.post('/complete-profile', protectRoute,async (req, res) => {
 
     if (req.user.profileComplete ){
         return res.status(400).json({error: "Profile already completed"});

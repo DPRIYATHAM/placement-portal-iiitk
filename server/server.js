@@ -2,7 +2,7 @@ const express = require('express');
 const cors=require('cors');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
-require('./cooking.js');
+const mainRoutes = require('./cooking.js');
 dotenv.config();
 const app = express();
 const connectToMongoDB = require('./src/db/db.js');
@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
+app.use(mainRoutes);
 
 
 const IP = process.env.IP || 'localhost';
