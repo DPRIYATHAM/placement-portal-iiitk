@@ -16,6 +16,24 @@ router.get('/all', protectRoute, async (req, res) => {
     }
 });
 
+// get all drives that student is eligible for
+router.get('/eligible', protectRoute, async (req, res) => {
+    try {
+        const student = await Student.findOne({ creds: req.user.creds });
+        const drives = await Drive.find({});
+        console.log('student:', student);
+        console.log('drives:', drives);
+
+        const eligibleDrives = drives.filter(drive => meetsCriteria(student, drive.criteria));
+
+        res.json(eligibleDrives);
+    } catch (error) {
+        console.error('Error fetching eligible drives:', error);
+        res.status(500).send('Server error');
+    }
+});
+
+
 // get drive by id
 router.get('/:driveId', protectRoute, async (req, res) => {
     try {
@@ -35,7 +53,7 @@ router.get('/:driveId', protectRoute, async (req, res) => {
 // apply for a drive only if student meets the criteria
 router.post('/apply/:driveId', protectRoute, async (req, res) => {
     try {
-        const student = await Student.findById(req.user.id);
+        const student = await Student.findOne({ creds: req.user.creds });
         const drive = await Drive.findById(req.params.driveId);
 
         if (!drive) {
@@ -61,20 +79,6 @@ router.post('/apply/:driveId', protectRoute, async (req, res) => {
     }
 });
 
-// get all drives that student is eligible for
-router.get('/eligible', protectRoute, async (req, res) => {
-    try {
-        const student = await Student.findById(req.user.id);
-        const drives = await Drive.find({});
-
-        const eligibleDrives = drives.filter(drive => meetsCriteria(student, drive.criteria));
-
-        res.json(eligibleDrives);
-    } catch (error) {
-        console.error('Error fetching eligible drives:', error);
-        res.status(500).send('Server error');
-    }
-});
 
 // st
 router.delete('/withdraw/:driveId', protectRoute, async (req, res) => {

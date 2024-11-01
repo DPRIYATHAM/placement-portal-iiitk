@@ -14,16 +14,16 @@ const protectRoute = async (req, res, next) => {
         }
         let user = await Student.findOne({ creds: decoded.userId })
                                 // .populate('creds', '-password'); maybe add the creds data if needed
+        const creds = await Creds.findById(decoded.userId).select('-password');
 
         if (!user) {
-            const creds = await Creds.findById(decoded.userId).select('-password');
             if (!creds) {
                 return res.status(401).json({ error: "Not authorized, user not found" });
             }
 
             req.user = { creds, profileComplete: false };
         } else {
-            req.user = { user, profileComplete: true };
+            req.user = { creds, profileComplete: true };
         }
         next();
     }

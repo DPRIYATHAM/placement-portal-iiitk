@@ -33,7 +33,7 @@ const login = async (req, res) => {
     try {
         // TODO : Add CoordinatorCred model
         const Model = userType === 'student' ? StudentCred : CoordinatorCred;
-        const ProfileModel = userType === 'student' ? StudentProfile : Coordinator; // Adjust according to your models
+        const ProfileModel = userType === 'student' ? Student : Coordinator; // Adjust according to your models
         const user = await Model.findOne({ username });
 
 
@@ -42,7 +42,7 @@ const login = async (req, res) => {
             // if profile not found, then user is not registered yet so send 409 status code with message and set the cookie to
             generateTokenAndSetCookie(user._id.toString(), res);
             if (!profile) {
-                return res.status(409).json({
+                return res.status(201).json({
                     _id: user._id,
                     username: user.username,
                     userType,

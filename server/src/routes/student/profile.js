@@ -2,16 +2,18 @@ const express = require('express');
 const router = express.Router();
 const protectAuth = require('../../middleware/studentAuth');
 const Student  = require('../../models/studentModel');
-
+const StudentCred = require('../../models/studentCred');
 // fetch userinfo
 router.get('/', protectAuth, async (req, res) => {
     try {
+        const student = await Student.findOne({ creds: req.user.creds._id });
+
         
-        const student = await Student.findById(req.user.id).select('-creds.password -creds.lastLogin');
-        
-        // if (!student) {
-        //     return res.status(404).send('Student not found');
-        // }
+
+        console.log(student);
+        if (!student) {
+            return res.status(404).send('Student not found');
+        }
 
         res.json({
             roll_no: student.roll_no,
@@ -34,7 +36,7 @@ router.get('/', protectAuth, async (req, res) => {
 });
 
 // update userinfo
-router.post('/', protectAuth, async (req, res) => {
+router.put('/', protectAuth, async (req, res) => {
     try {
         const updateData = {
             name: req.body.name,
@@ -47,15 +49,17 @@ router.post('/', protectAuth, async (req, res) => {
             digital_locker: req.body.digital_locker,
             address: req.body.address,
             academics: req.body.academics,
-            applied_drives: req.body.applied_drives
+            // applied_drives: req.body.applied_drives
         };
 
         // remove undefined or null fields
         Object.keys(updateData).forEach(key => updateData[key] === undefined || updateData[key] === null && delete updateData[key]);
-
+        console.log(updateData);    
+        const student = await Student.findOneAndUpdate({ creds: req.user.creds._id }, updateData, { new: true });
         
 
-        const student = await Student.findByIdAndUpdate(req.user.id, updateData, { new: true });
+
+        // const student = await Student.findByIdAndUpdate(req.user.id, );
 
         // if (!student) {
         //     return res.status(404).send('Student not found');

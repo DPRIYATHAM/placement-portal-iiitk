@@ -39,6 +39,7 @@ router.post('/complete-profile', protectRoute,async (req, res) => {
     
     try {
         const createData = {
+            roll_no : req.body.roll_no,
             name: req.body.name,
             email_id: req.body.email_id,
             stream: req.body.stream,
